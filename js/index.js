@@ -2,7 +2,7 @@ const URL_API = "https://fakestoreapi.com/products";
 
 async function buscarProdutos() {
   const containerProdutos = document.getElementById("produtos");
-
+  
   try {
     const resposta = await fetch(URL_API);
 
@@ -35,7 +35,7 @@ function exibirProdutos(produtos) {
 function criarCardProduto(produto) {
   const card = document.createElement("article");
   card.classList.add("card-produto");
-
+  
   const imagem = document.createElement("img");
   imagem.classList.add("imagem-produto");
   imagem.src = produto.image;
@@ -52,7 +52,10 @@ function criarCardProduto(produto) {
     style: "currency",
     currency: "USD",
   });
-
+  const botaoDetalhes = document.createElement("a");
+  botaoDetalhes.classList.add("botao-detalhes");
+  botaoDetalhes.href = `detalhes.html?id=${produto.id}`;
+  botaoDetalhes.textContent = "Ver detalhes";
   const botao = document.createElement("button");
   botao.classList.add("botao-carrinho");
   botao.textContent = "Adicionar ao carrinho";
@@ -61,7 +64,13 @@ function criarCardProduto(produto) {
     adicionarAoCarrinho(produto);
   });
 
-  card.append(imagem, titulo, preco, botao);
+  card.append(
+  imagem,
+  titulo,
+  preco,
+  botaoDetalhes,
+  botao
+  );
 
   return card;
 }
